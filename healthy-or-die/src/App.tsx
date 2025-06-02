@@ -2,6 +2,7 @@ import './App.css'
 import Snooze from './Snooze.jsx'
 import ThreatLevel from './ThreatLevel.jsx'
 import StopButton from './StopButton.jsx'
+import Timer from './Timer.jsx'
 
 import { useState, useRef, useEffect } from 'react'
 import * as tf from '@tensorflow/tfjs'
@@ -33,8 +34,21 @@ function App() {
   const [drinkCenter, setDrinkCenter] = useState({ x: 0, y: 0 })
   const [isSitting, setIsSitting] = useState(false)
   const [sittingCenter, setSittingCenter] = useState({ x: 0, y: 0 })
-  const [threatLevel, setThreatLevel] = useState(0)
-  const [resetThreatLevel, setResetThreatLevel] = useState(false)
+
+  const [threatLevel, setThreatLevel] = useState(10)
+  const [waterDrank, setWaterDrank] = useState(false)
+  const [snooze, setSnooze] = useState(false)
+  const [timer, setTimer] = useState(1000)
+  const [barValue, setBarValue] = useState(0)
+  const [barRate, setBarRate] = useState(25)
+
+  const resetThreatLevel = () => {
+    return setThreatLevel(0)
+  }
+
+  const snoozeThreatLevel = () => {
+    console.log('Snoozed')
+  }
   useEffect(() => {
     tf.ready().then(async () => {
       const drinkModel: any = await tf.loadGraphModel(
@@ -165,10 +179,12 @@ function App() {
           
           </div>
           <h1 className='text-[50px] font-bold'>{isDrinking ? 'Drinking' : 'Not Drinking'}</h1>
-          <StopButton />
+          <Timer barValue={barValue} setBarValue={setBarValue} barRate={barRate} setBarRate={setBarRate}/>
+          <StopButton resetThreatLevel={resetThreatLevel}/>
+      
         </div>
         <div className="">
-          <ThreatLevel threatLevel={threatLevel} resetThreatLevel={resetThreatLevel} />
+          <ThreatLevel threatLevel={threatLevel}/>
           <Snooze />
         </div>
       </div>
