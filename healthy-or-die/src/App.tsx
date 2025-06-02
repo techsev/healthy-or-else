@@ -202,6 +202,7 @@ function App() {
             increaseThreatLevel={increaseThreatLevel}
             setBarValue={setBarValue}
             barValue={barValue}
+            isDrinking={isDrinking}
           />
           <StopButton setHeartEmpty={setHeartEmpty}/>
       
