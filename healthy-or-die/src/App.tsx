@@ -16,6 +16,19 @@ import '@tensorflow/tfjs-backend-cpu' // set backend to webgl
 
 const MODEL_PATH = './model_nano/model.json'
 
+const editorExtensionId = 'cglehofamioleppjgechidkehkcgkahb'
+
+
+const triggerEffect = (effect: string) => {
+  if (chrome && chrome.runtime) {
+    console.log('triggered')
+    chrome.runtime.sendMessage(editorExtensionId, {
+      type: 'trigger-effect',
+      effect: effect
+    })
+  }
+}
+
 function App() {
 
   const webcamRef = useRef<Webcam>(null)
@@ -35,20 +48,28 @@ function App() {
   const [isSitting, setIsSitting] = useState(false)
   const [sittingCenter, setSittingCenter] = useState({ x: 0, y: 0 })
 
-  const [threatLevel, setThreatLevel] = useState(10)
   const [waterDrank, setWaterDrank] = useState(false)
   const [snooze, setSnooze] = useState(false)
   const [timer, setTimer] = useState(1000)
   const [barValue, setBarValue] = useState(0)
-  const [barRate, setBarRate] = useState(25)
+  const [barRate, setBarRate] = useState(10)
 
-  const resetThreatLevel = () => {
-    return setThreatLevel(0)
+  const [heartEmpty, setHeartEmpty] = useState([false, false, false])
+
+  const increaseThreatLevel = () => {
+    console.log(heartEmpty)
+    for (let i = 0; i < heartEmpty.length; i++) {
+      if(heartEmpty[i] === false) {
+        heartEmpty[i] = true;
+        break
+      }
+    }
   }
 
   const snoozeThreatLevel = () => {
     console.log('Snoozed')
   }
+
   useEffect(() => {
     tf.ready().then(async () => {
       const drinkModel: any = await tf.loadGraphModel(
@@ -76,8 +97,6 @@ function App() {
 
   return (
     <>
-
-
       <div className="gap-4 grid grid-cols-[65%_35%] border-emerald-400 h-full w-full">
         <div className="">
         <div className="w-full h-150 rounded-md border-2 border-emerald-600 mb-8 relative">
@@ -176,13 +195,29 @@ function App() {
           
           </div>
           <h1 className='text-[50px] font-bold'>{isDrinking ? 'Drinking' : 'Not Drinking'}</h1>
-          <Timer barValue={barValue} setBarValue={setBarValue} barRate={barRate} setBarRate={setBarRate}/>
-          <StopButton resetThreatLevel={resetThreatLevel}/>
+          <Timer 
+            barRate={barRate} 
+            setBarRate={setBarRate} 
+            triggerEffect={triggerEffect}
+            increaseThreatLevel={increaseThreatLevel}
+            setBarValue={setBarValue}
+            barValue={barValue}
+          />
+          <StopButton setHeartEmpty={setHeartEmpty}/>
       
         </div>
         <div className="">
-          <ThreatLevel threatLevel={threatLevel}/>
-          <Snooze />
+          <ThreatLevel heartEmpty={heartEmpty}/>
+          <Snooze setHeartEmpty={setHeartEmpty}/>
+
+          <button
+          className='bg-red-500 text-black px-4 py-2 rounded-md'
+          onClick={() => {
+            triggerEffect('spinWords')
+          }}
+        >
+          Trigger Effect
+        </button>
         </div>
       </div>
     </>
