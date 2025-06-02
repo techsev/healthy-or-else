@@ -80,6 +80,11 @@ body.spinWords .word {
 
 
 
+body {
+  filter: blur(0px);
+  transition: filter 5s ease-in-out;
+}
+
 body::after {
   content: '""';
   display: block;
@@ -94,8 +99,12 @@ body::after {
   filter: blur(0px);
 }
 
+body.blue {
+  filter: blur(10px);
+}
+
 body.blue::after {
   opacity: 0.2;
-  filter: blur(100px);
+  
   
 }
