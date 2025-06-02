@@ -59,6 +59,9 @@ export const detect = async (
 
   tf.engine().startScope() // start scoping tf engine
   const [input, xRatio, yRatio] = preprocess(source, modelWidth, modelHeight) // preprocess image
+
+
+  
   // console.log(xRatio, yRatio)
   if (model.net === null) {
     return
@@ -137,6 +140,7 @@ export const detectVideo = (
    * Function to detect every frame from video
    */
   const detectCocoFrame = async () => {
+    return
     if (modelCoco === null) {
       return
     }
@@ -162,8 +166,8 @@ export const detectVideo = (
 
   const detectDrinkFrame = async () => {
     frameCounter++
-    console.log(frameCounter)
-    await detectCocoFrame() // initialize to detect every frame
+    // console.log(frameCounter)
+    // await detectCocoFrame() // initialize to detect every frame
   
     if (frameCounter % 2 !== 0) {
       requestAnimationFrame(detectDrinkFrame) // get another frame
@@ -171,16 +175,12 @@ export const detectVideo = (
     }
     
     
-    if (!isVisible) {
-      requestAnimationFrame(detectDrinkFrame) // get another frame
-      return
-    }
     if (vidSource.videoWidth === 0 && vidSource.srcObject === null) {
       const ctx = canvasRef.getContext('2d')
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height) // clean canvas
       return // handle if source is closed
     }
-
+    
     detect(
       vidSource,
       modelDrink,

@@ -1,0 +1,26 @@
+{
+    "name": "Hello Extensions",
+    "description": "Base Level Extension",
+    "version": "1.0",
+    "permissions": ["scripting", "tabs"],
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "scripts/background.js"
+    },
+    "action": {
+        "default_popup": "main.html",
+        "default_icon": "icon.png"
+    },
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["scripts/splitting.js", "scripts/content.js", "scripts/popup.js"],
+        "css": ["css/splitting.css"]
+    }],
+    "web_accessible_resources": [{
+        "resources": ["css/splitting.css", "scripts/splitting.js", "scripts/popup.js"],
+        "matches": ["<all_urls>"]
+    }],
+    "externally_connectable": {
+        "matches": ["<all_urls>"]
+    }
+}
