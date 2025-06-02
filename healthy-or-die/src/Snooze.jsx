@@ -8,7 +8,7 @@ function Snooze() {
 
   return (
     <>
-      <button class="w-100 h-40 border-2 border-amber-300">The Big Button w-100 h-40</button>
+      <button className="w-100 h-40 border-2 border-amber-300">The Big Button w-100 h-40</button>
     </>
   )
 }

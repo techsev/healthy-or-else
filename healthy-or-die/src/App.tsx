@@ -78,9 +78,6 @@ function App() {
     <>
 
 
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
       <div className="gap-4 grid grid-cols-[65%_35%] border-emerald-400 h-full w-full">
         <div className="">
         <div className="w-full h-150 rounded-md border-2 border-emerald-600 mb-8 relative">

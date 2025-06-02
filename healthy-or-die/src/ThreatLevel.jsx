@@ -11,7 +11,12 @@ function ThreatLevel({ threatLevel }) {
       <div className="border-pink-800 border-2 w-full h-150  mb-8 ">
       <h1>Threat Level : {threatLevel}</h1>
         <div className="flex flex-col justify-center items-center w-full">
-          <img className ="w-1/4" src="./assets/emptyHeart.png"/>
+          {
+            heartEmpty.map((heart, key) => {
+              return <div> Hi </div>
+            }
+            )
+          }
           <img className ="w-1/4" src="./assets/emptyHeart.png"/>
           <img className ="w-1/4" src="./assets/fullHeart.png"/>
         </div>

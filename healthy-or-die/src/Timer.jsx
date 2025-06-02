@@ -22,8 +22,9 @@ function Timer( {barRate, setBarRate, barValue, setBarValue} ) {
 
   return (
     <>
-      <div className="w-100 h-30">
-        <progress className="w-100 h-15" value={barValue} onClick={() => setBarValue(0)}></progress>
+      <div className="ml-39 w-100 h-30 flex flex-col">
+        Thirst Meter
+        <progress className="w-100 h-15 bg-blue-600 rotate-180" value={barValue} onClick={() => setBarValue(0)}></progress>
       </div>
     </>
   )
