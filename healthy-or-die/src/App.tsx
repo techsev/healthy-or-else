@@ -52,7 +52,7 @@ function App() {
   const [snooze, setSnooze] = useState(false)
   const [timer, setTimer] = useState(1000)
   const [barValue, setBarValue] = useState(0)
-  const [barRate, setBarRate] = useState(10)
+  const [barRate, setBarRate] = useState(30)
 
   const [heartEmpty, setHeartEmpty] = useState([false, false, false])
 
@@ -72,7 +72,7 @@ function App() {
 
   const sendEffect = () => {
     const threatLevel = heartEmpty.filter(Boolean).length
-
+    console.log(threatLevel)
     switch(threatLevel) {
       case 0:
         triggerEffect('stop')
@@ -92,9 +92,16 @@ function App() {
 
   useEffect(() => {
     sendEffect()
-  }, heartEmpty)
-
+  }, [JSON.stringify(heartEmpty)])
   
+
+  useEffect(() => {
+    if (isDrinking) {
+      setHeartEmpty([false, false, false])
+    }
+  }, [isDrinking])
+
+
 
   useEffect(() => {
     tf.ready().then(async () => {
@@ -228,13 +235,14 @@ function App() {
             increaseThreatLevel={increaseThreatLevel}
             setBarValue={setBarValue}
             barValue={barValue}
+            isDrinking={isDrinking}
           />
-          <StopButton setHeartEmpty={setHeartEmpty}/>
+          {/* <StopButton setHeartEmpty={setHeartEmpty}/> */}
       
         </div>
         <div className="">
           <ThreatLevel heartEmpty={heartEmpty}/>
-          <Snooze setHeartEmpty={setHeartEmpty}/>
+          {/* <Snooze setHeartEmpty={setHeartEmpty}/> */}
 
           <button
           className='bg-red-500 text-black px-4 py-2 rounded-md'
