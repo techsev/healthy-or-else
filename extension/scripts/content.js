@@ -21,17 +21,21 @@ script.onload = () => {
   }, 2000)
 }
 
-const effects = ['spinWords']
+const effects = ['spinWords', 'blue']
 console.log('content.js')
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  effects.forEach((effect) => {
-    document.body.classList.remove(effect)
-  })
+
   switch (message.type) {
     case 'spinWords':
       document.body.classList.add('spinWords')
       break
     case 'stop':
+      effects.forEach((effect) => {
+        document.body.classList.remove(effect)
+      })
+      break
+    default:
+      document.body.classList.add(message.type)
       break
   }
 })
