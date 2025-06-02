@@ -16,6 +16,17 @@ import '@tensorflow/tfjs-backend-cpu' // set backend to webgl
 
 const MODEL_PATH = './model_nano/model.json'
 
+const editorExtensionId = 'cglehofamioleppjgechidkehkcgkahb'
+
+
+const triggerEffect = (effect: string) => {
+  if (chrome && chrome.runtime) {
+    chrome.runtime.sendMessage(editorExtensionId, {
+      type: 'trigger-effect',
+      effect: effect
+    })
+  }
+}
 function App() {
 
   const webcamRef = useRef<Webcam>(null)
@@ -49,6 +60,7 @@ function App() {
   const snoozeThreatLevel = () => {
     console.log('Snoozed')
   }
+
   useEffect(() => {
     tf.ready().then(async () => {
       const drinkModel: any = await tf.loadGraphModel(
@@ -76,11 +88,6 @@ function App() {
 
   return (
     <>
-
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
       <div className="gap-4 grid grid-cols-[65%_35%] border-emerald-400 h-full w-full">
         <div className="">
         <div className="w-full h-150 rounded-md border-2 border-emerald-600 mb-8 relative">
@@ -186,6 +193,17 @@ function App() {
         <div className="">
           <ThreatLevel threatLevel={threatLevel}/>
           <Snooze />
+
+          <button
+          className='bg-red-500 text-black px-4 py-2 rounded-md'
+          onClick={() => {
+            triggerEffect('spinWords')
+
+            
+          }}
+        >
+          Trigger Effect
+        </button>
         </div>
       </div>
     </>
