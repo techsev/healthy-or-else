@@ -82,7 +82,7 @@ body.spinWords .word {
 
 body {
   filter: blur(0px);
-  transition: filter 5s ease-in-out;
+  transition: filter 5s ease-in-out;  
 }
 
 body::after {
