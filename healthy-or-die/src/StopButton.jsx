@@ -3,12 +3,12 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function StopButton( {resetThreatLevel} ) {
+function StopButton( { resetThreatLevel } ) {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <button class="w-100 h-40 border-2 border-blue-900" onClick={() => resetThreatLevel()}>Stop</button>
+      <button class="invisible w-100 h-40 border-2 border-blue-900" onClick={() => resetThreatLevel()}>Stop</button>
     </>
   )
 }
