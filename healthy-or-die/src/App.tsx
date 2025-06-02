@@ -70,6 +70,32 @@ function App() {
     console.log('Snoozed')
   }
 
+  const sendEffect = () => {
+    const threatLevel = heartEmpty.filter(Boolean).length
+
+    switch(threatLevel) {
+      case 0:
+        triggerEffect('stop')
+        break
+      case 1:
+        triggerEffect('replace')
+        break
+      case 2:
+        triggerEffect('blue')
+        break
+      case 3:
+        triggerEffect('spinWords')
+        break
+    }
+  }
+
+
+  useEffect(() => {
+    sendEffect()
+  }, heartEmpty)
+
+  
+
   useEffect(() => {
     tf.ready().then(async () => {
       const drinkModel: any = await tf.loadGraphModel(
@@ -198,7 +224,7 @@ function App() {
           <Timer 
             barRate={barRate} 
             setBarRate={setBarRate} 
-            triggerEffect={triggerEffect}
+            sendEffect={sendEffect}
             increaseThreatLevel={increaseThreatLevel}
             setBarValue={setBarValue}
             barValue={barValue}

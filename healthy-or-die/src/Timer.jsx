@@ -4,7 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function Timer( {barRate, setBarRate, barValue, setBarValue, triggerEffect, increaseThreatLevel} ) {
+function Timer( {barRate, setBarRate, barValue, setBarValue, sendEffect, increaseThreatLevel} ) {
   const [count, setCount] = useState(0)
   const [setting, setSetting] = useState(false)
   const barValueRef = useRef(barValue)
@@ -13,7 +13,7 @@ function Timer( {barRate, setBarRate, barValue, setBarValue, triggerEffect, incr
     const interval = setInterval(() => {
       if (barValueRef.current >= 1) {
         barValueRef.current = 0
-        triggerEffect()
+        // sendEffect()
         increaseThreatLevel()
       } else {
         barValueRef.current = barValueRef.current + .0008
