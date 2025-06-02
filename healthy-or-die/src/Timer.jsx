@@ -18,6 +18,8 @@ function Timer( {barRate, setBarRate, barValue, setBarValue, triggerEffect, incr
       } else {
         barValueRef.current = barValueRef.current + .0008
       }
+      setCount(count + 1)
+      setBarValue(barValueRef.current)
     }, barRate)
   }, []);
 
@@ -28,6 +30,7 @@ function Timer( {barRate, setBarRate, barValue, setBarValue, triggerEffect, incr
     <>
       <div className="ml-28 w-100 h-30 flex flex-col">
         Thirst Meter
+        {barValue}
         <progress className="w-100 h-15 bg-blue-600 rotate-180" value={barValue} onClick={() => setBarValue(0)}></progress>
       </div>
     </>

@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.runtime.sendMessage({ type: 'trigger-effect', effect: 'blue' })
     // Send a message, update storage, etc.
   })
+  const buttonReplace = document.getElementById('buttonReplace')
+  buttonReplace.addEventListener('click', () => {
+    chrome.runtime.sendMessage({ type: 'trigger-effect', effect: 'replace' })
+    // Send a message, update storage, etc.
+  })
   // const button = document.getElementById('buttonSpin')
   // button.addEventListener('click', () => {
   //   chrome.runtime.sendMessage({ type: 'trigger-effect', effect: 'spinWords' })

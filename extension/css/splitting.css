@@ -106,5 +106,17 @@ body.blue {
 body.blue::after {
   opacity: 0.2;
   
-  
+}
+
+body.replace .word:nth-child(5n) {
+  color: transparent;
+  letter-spacing: -9900px;
+
+}
+
+body.replace .word:nth-child(5n)::before {
+  content: 'Water';
+  display: inline-block;
+  letter-spacing: 0px;
+  color: black;
 }
