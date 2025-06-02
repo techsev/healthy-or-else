@@ -1,30 +1,27 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function Timer( {barRate, setBarRate, barValue, setBarValue, triggerEffect, increaseThreatLevel} ) {
   const [count, setCount] = useState(0)
+  const [setting, setSetting] = useState(false)
+  const barValueRef = useRef(barValue)
 
   useEffect (() => {
     const interval = setInterval(() => {
-      setBarValue((barValue) => {
-        if (barValue >= 1) {
-          return 0
-        } else {
-          return barValue + .0008
-        }
-      })
+      if (barValueRef.current >= 1) {
+        barValueRef.current = 0
+        triggerEffect()
+        increaseThreatLevel()
+      } else {
+        barValueRef.current = barValueRef.current + .0008
+      }
     }, barRate)
   }, []);
 
-  useEffect(() => {
-    if(barValue === 0 ) {
-      triggerEffect()
-      increaseThreatLevel()
-    }
-  }, barValue)
+
   
 
   return (
