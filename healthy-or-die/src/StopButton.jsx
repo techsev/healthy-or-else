@@ -8,7 +8,7 @@ function StopButton( { resetThreatLevel } ) {
 
   return (
     <>
-      <button class="invisible w-100 h-40 border-2 border-blue-900" onClick={() => resetThreatLevel()}>Stop</button>
+      <button className="w-100 h-40 border-2 border-blue-900" onClick={() => resetThreatLevel()}>Stop</button>
     </>
   )
 }
