@@ -100,7 +100,7 @@ body::after {
 }
 
 body.blue {
-  filter: blur(4px);
+  filter: blur(2px);
 }
 
 body.blue::after {
